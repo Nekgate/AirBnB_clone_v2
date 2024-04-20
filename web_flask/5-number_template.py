@@ -13,6 +13,7 @@ from flask import Flask
 from flask import render_template
 
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 
 
 @app.route("/", strict_slashes=False)
@@ -47,15 +48,17 @@ def python(text="is cool"):
 
 
 @app.route("/number/<int:n>", strict_slashes=False)
-def number(n):
+def number_text(n):
     """Display 'n is a number' only if n is an integer."""
+    n = str(n)
     return "{} is a number".format(n)
 
 
 @app.route("/number_template/<int:n>", strict_slashes=False)
-def number_template(n):
-    """Displays an HTML page only if <n> is an integer."""
-    return render_template("5-number.html", n=n)
+def html_num(n):
+    """ display html if n is int. """
+    n = str(n)
+    return render_template('5-number.html', n=n)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
