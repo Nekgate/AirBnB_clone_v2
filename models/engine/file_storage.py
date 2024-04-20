@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-
-"""The file storage class for AirBnB"""
+"""This is the file storage class for AirBnB"""
 import json
 from models.base_model import BaseModel
 from models.user import User
@@ -23,7 +22,7 @@ class FileStorage:
     __objects = {}
 
     def all(self, cls=None):
-        """Returns a dictionary
+        """returns a dictionary
         Return:
             returns a dictionary of __object
         """
@@ -49,7 +48,7 @@ class FileStorage:
             self.__objects[key] = obj
 
     def save(self):
-        """Serialize the file path to JSON file path
+        """serialize the file path to JSON file path
         """
         my_dict = {}
         for key, value in self.__objects.items():
@@ -58,7 +57,7 @@ class FileStorage:
             json.dump(my_dict, f)
 
     def reload(self):
-        """Serialize the file path to JSON file path
+        """serialize the file path to JSON file path
         """
         try:
             with open(self.__file_path, 'r', encoding="UTF-8") as f:
@@ -69,13 +68,13 @@ class FileStorage:
             pass
 
     def delete(self, obj=None):
-        """ Delete an existing element
+        """ delete an existing element
         """
         if obj:
             key = "{}.{}".format(type(obj).__name__, obj.id)
             del self.__objects[key]
 
     def close(self):
-        """ Calls reload()
+        """ calls reload()
         """
         self.reload()
